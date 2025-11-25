@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - L2 DEUS</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" href="../assets/images/logo.png">
+</head>
+<body class="panel-page">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.png" alt="L2 DEUS">
+            </a>
+            <nav class="nav">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="donate.html" class="nav-link active">Donate</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+            </nav>
+            <div class="header-cta">
+                <a href="login.html" class="btn btn-ghost btn-small">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Donate Panel -->
+    <div class="panel-container">
+        <div class="panel panel-wide">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="card-title">Donate & Get Coins</h3>
+                    <p class="card-subtitle">Support the server and get Deus Coins instantly</p>
+                </div>
+
+                <!-- Step 1: Select Character -->
+                <h4 class="mb-2">1. Select Character</h4>
+                <p class="text-muted mb-2" style="font-size: 0.9rem;">Coins will be delivered to this character</p>
+                <div class="character-grid" id="characterGrid">
+                    <div class="character-card" data-char="ShadowBlade">
+                        <div class="character-avatar">⚔️</div>
+                        <div class="character-name">ShadowBlade</div>
+                        <div class="character-class">Gladiator</div>
+                        <div class="character-level">Level 78</div>
+                    </div>
+                    <div class="character-card" data-char="SilentArrow">
+                        <div class="character-avatar">🏹</div>
+                        <div class="character-name">SilentArrow</div>
+                        <div class="character-class">Sagittarius</div>
+                        <div class="character-level">Level 76</div>
+                    </div>
+                    <div class="character-card" data-char="HolyLight">
+                        <div class="character-avatar">✨</div>
+                        <div class="character-name">HolyLight</div>
+                        <div class="character-class">Cardinal</div>
+                        <div class="character-level">Level 74</div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Choose Amount -->
+                <h4 class="mb-2">2. Choose Amount</h4>
+                <div class="donation-amount-display">
+                    <span class="amount-currency">€</span><span class="amount-value" id="amountDisplay">20</span>
+                    <div class="coins-preview">
+                        You'll receive <span class="coins-amount" id="coinsPreview">220</span> Deus Coins
+                        <span class="bonus-badge" id="bonusBadge">+10% BONUS</span>
+                    </div>
+                </div>
+
+                <div class="slider-container">
+                    <input type="range" class="donation-slider" id="donationSlider" min="5" max="200" value="20" step="5">
+                    <div class="slider-labels">
+                        <span>€5</span>
+                        <span>€200</span>
+                    </div>
+                </div>
+
+                <div class="quick-amounts">
+                    <button class="quick-amount-btn" data-amount="10">€10</button>
+                    <button class="quick-amount-btn active" data-amount="20">€20<span class="bonus">+10%</span></button>
+                    <button class="quick-amount-btn" data-amount="50">€50<span class="bonus">+20%</span></button>
+                    <button class="quick-amount-btn" data-amount="100">€100<span class="bonus">+30%</span></button>
+                </div>
+
+                <!-- Bonus Tiers -->
+                <div class="bonus-tiers mt-3">
+                    <div class="bonus-tiers-title">Bonus Tiers</div>
+                    <div class="tier-list">
+                        <div class="tier-item" data-tier="20">
+                            <div class="tier-threshold">€20+</div>
+                            <div class="tier-bonus">+10%</div>
+                        </div>
+                        <div class="tier-item" data-tier="50">
+                            <div class="tier-threshold">€50+</div>
+                            <div class="tier-bonus">+20%</div>
+                        </div>
+                        <div class="tier-item" data-tier="100">
+                            <div class="tier-threshold">€100+</div>
+                            <div class="tier-bonus">+30%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Payment Method -->
+                <h4 class="mb-2 mt-4">3. Payment Method</h4>
+                <div class="payment-methods" id="paymentMethods">
+                    <div class="payment-option selected" data-method="paypal">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-name">PayPal</div>
+                        <div class="payment-bonus">Credit/Debit Card</div>
+                    </div>
+                    <div class="payment-option" data-method="crypto">
+                        <div class="payment-icon">₿</div>
+                        <div class="payment-name">Cryptocurrency</div>
+                        <div class="payment-bonus">+10% Extra Coins</div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-row">
+                        <span>Character</span>
+                        <span id="summaryChar">Select a character</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Base Coins</span>
+                        <span id="summaryBase">200</span>
+                    </div>
+                    <div class="summary-row" id="tierBonusRow">
+                        <span>Tier Bonus (10%)</span>
+                        <span class="bonus" id="summaryTierBonus">+20</span>
+                    </div>
+                    <div class="summary-row hidden" id="cryptoBonusRow">
+                        <span>Crypto Bonus (10%)</span>
+                        <span class="bonus" id="summaryCryptoBonus">+22</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total Coins</span>
+                        <span id="summaryTotal">220</span>
+                    </div>
+                </div>
+
+                <!-- Terms & Checkout -->
+                <div class="form-group mt-3">
+                    <label class="form-checkbox">
+                        <input type="checkbox" id="termsCheck">
+                        <span>I agree to the <a href="#">Terms of Service</a> and understand that donations are non-refundable</span>
+                    </label>
+                </div>
+
+                <button class="btn btn-primary btn-block btn-large" id="checkoutBtn">Proceed to Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            coinsPerEuro: 10,
+            cryptoBonus: 0.10,
+            tierBonuses: {
+                20: 0.10,
+                50: 0.20,
+                100: 0.30
+            }
+        };
+
+        // State
+        let state = {
+            amount: 20,
+            character: null,
+            paymentMethod: 'paypal'
+        };
+
+        // Elements
+        const slider = document.getElementById('donationSlider');
+        const amountDisplay = document.getElementById('amountDisplay');
+        const coinsPreview = document.getElementById('coinsPreview');
+        const bonusBadge = document.getElementById('bonusBadge');
+        const quickBtns = document.querySelectorAll('.quick-amount-btn');
+        const tierItems = document.querySelectorAll('.tier-item');
+        const charCards = document.querySelectorAll('.character-card');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+
+        // Summary elements
+        const summaryChar = document.getElementById('summaryChar');
+        const summaryBase = document.getElementById('summaryBase');
+        const summaryTierBonus = document.getElementById('summaryTierBonus');
+        const summaryCryptoBonus = document.getElementById('summaryCryptoBonus');
+        const summaryTotal = document.getElementById('summaryTotal');
+        const tierBonusRow = document.getElementById('tierBonusRow');
+        const cryptoBonusRow = document.getElementById('cryptoBonusRow');
+
+        // Calculate coins
+        function calculateCoins(amount, isCrypto) {
+            let baseCoins = amount * CONFIG.coinsPerEuro;
+            let tierBonus = 0;
+            let cryptoBonus = 0;
+            let tierPercent = 0;
+
+            // Find tier bonus
+            for (let threshold of [100, 50, 20]) {
+                if (amount >= threshold) {
+                    tierPercent = CONFIG.tierBonuses[threshold];
+                    tierBonus = Math.floor(baseCoins * tierPercent);
+                    break;
+                }
+            }
+
+            // Crypto bonus
+            if (isCrypto) {
+                cryptoBonus = Math.floor((baseCoins + tierBonus) * CONFIG.cryptoBonus);
+            }
+
+            return {
+                base: baseCoins,
+                tierBonus,
+                tierPercent,
+                cryptoBonus,
+                total: baseCoins + tierBonus + cryptoBonus
+            };
+        }
+
+        // Update display
+        function updateDisplay() {
+            const isCrypto = state.paymentMethod === 'crypto';
+            const coins = calculateCoins(state.amount, isCrypto);
+
+            amountDisplay.textContent = state.amount;
+            coinsPreview.textContent = coins.total;
+
+            // Bonus badge
+            if (coins.tierPercent > 0 || isCrypto) {
+                let totalPercent = Math.round(coins.tierPercent * 100);
+                if (isCrypto) totalPercent += 10;
+                bonusBadge.textContent = `+${totalPercent}% BONUS`;
+                bonusBadge.classList.remove('hidden');
+            } else {
+                bonusBadge.classList.add('hidden');
+            }
+
+            // Update tier highlights
+            tierItems.forEach(item => {
+                const tier = parseInt(item.dataset.tier);
+                item.classList.toggle('active', state.amount >= tier);
+            });
+
+            // Update quick buttons
+            quickBtns.forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.amount) === state.amount);
+            });
+
+            // Update summary
+            summaryBase.textContent = coins.base;
+            
+            if (coins.tierBonus > 0) {
+                tierBonusRow.classList.remove('hidden');
+                tierBonusRow.querySelector('span').textContent = `Tier Bonus (${Math.round(coins.tierPercent * 100)}%)`;
+                summaryTierBonus.textContent = `+${coins.tierBonus}`;
+            } else {
+                tierBonusRow.classList.add('hidden');
+            }
+
+            if (isCrypto) {
+                cryptoBonusRow.classList.remove('hidden');
+                summaryCryptoBonus.textContent = `+${coins.cryptoBonus}`;
+            } else {
+                cryptoBonusRow.classList.add('hidden');
+            }
+
+            summaryTotal.textContent = coins.total;
+        }
+
+        // Slider
+        slider.addEventListener('input', (e) => {
+            state.amount = parseInt(e.target.value);
+            updateDisplay();
+        });
+
+        // Quick amount buttons
+        quickBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                state.amount = parseInt(btn.dataset.amount);
+                slider.value = state.amount;
+                updateDisplay();
+            });
+        });
+
+        // Character selection
+        charCards.forEach(card => {
+            card.addEventListener('click', () => {
+                charCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                state.character = card.dataset.char;
+                summaryChar.textContent = state.character;
+            });
+        });
+
+        // Payment method
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                paymentOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                state.paymentMethod = option.dataset.method;
+                updateDisplay();
+            });
+        });
+
+        // Checkout
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (!state.character) {
+                alert('Please select a character first.');
+                return;
+            }
+            if (!document.getElementById('termsCheck').checked) {
+                alert('Please accept the Terms of Service.');
+                return;
+            }
+            alert(`Redirecting to ${state.paymentMethod === 'paypal' ? 'PayPal' : 'Crypto'} payment for €${state.amount}...`);
+        });
+
+        // Initial update
+        updateDisplay();
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - L2 DEUS</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" href="../assets/images/logo.png">
+</head>
+<body class="panel-page">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="../index.html" class="logo">
+                <img src="../assets/images/logo.png" alt="L2 DEUS">
+            </a>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#features" class="nav-link">Features</a>
+                <a href="../index.html#download" class="nav-link">Download</a>
+            </nav>
+            <div class="header-cta">
+                <a href="login.html" class="btn btn-primary btn-small">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Panel -->
+    <div class="panel-container">
+        <div class="panel">
+            <div class="card">
+                <div class="card-header text-center">
+                    <img src="../assets/images/logo.png" alt="DEUS" style="height: 60px; margin-bottom: 1rem;">
+                    <h3 class="card-title">Welcome Back</h3>
+                    <p class="card-subtitle">Sign in with your game account</p>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-input" placeholder="Enter your username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-checkbox">
+                            <input type="checkbox">
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block btn-large">Sign In</button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p class="text-muted">No account? Just login to the game — accounts are created automatically on first login.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login functionality requires backend integration.');
+        });
+    </script>
+</body>
+</html>
